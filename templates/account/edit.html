@@ -1,0 +1,22 @@
+{% extends "shop/detail_base.html" %}
+{% block title %}Edit your account{% endblock %}
+
+
+{% block content %}
+ <div class="col-12 col-lg-8">
+    <div class="checkout_details_area mt-50 clearfix">
+
+        <div class="cart-title">
+            <h2>Edit your account</h2>
+        </div>
+        <p>You can edit your account using the following form:</p>
+        <form action="." method="post" enctype="multipart/form-data">
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            {% csrf_token %}
+        <p><input type="submit" value="Save changes"></p></form>
+
+    </div>
+</div>
+
+ {% endblock %}

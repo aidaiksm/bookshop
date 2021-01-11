@@ -1,0 +1,34 @@
+{% extends "shop/detail_base.html" %}
+{% load static %}
+{% block title %}
+Search
+{% endblock %}
+{% block content %}
+{% if query %}
+    <h1>Results containing "{{ query }}"</h1>
+    <h3>
+    {% with results.count as total_results %}
+    Found {{ total_results }} result {{ total_results|pluralize }}
+    {% endwith %}
+    </h3>
+    {% for product in results %}
+    <div class="product-detail">
+        <img src="{% if product.image %}{{ product.image.url }}{% else %}
+            {% static 'img/no_image.png' %}{% endif %}">
+        <a href="{{ product.get_absolute_url }}"><h2>{{ product.name }}</h2></a>
+        <h3>
+            <a href="{{ product.category.get_absolute_url }}">{{product.category }}</a>
+        </h3>
+        <p class="price">${{ product.price }}</p>
+        {{ product.description|linebreaks }}
+    </div>
+{% endfor %}
+{% else %}
+
+        <h1>Search for posts</h1>
+            <form action="." method="get">
+                {{ form.as_p }}
+                <input type="submit" value="Search">
+            </form>
+{% endif %}
+{% endblock %}
